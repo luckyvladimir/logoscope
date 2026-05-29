@@ -1,6 +1,8 @@
 # logoscope
 
-A fast, terminal-based log file viewer built with Rust and [ratatui](https://github.com/ratatui/ratatui).
+A fast, terminal-based log file viewer built with Rust and [ratatui](https://github.com/ratatui/ratatui). Inspired by [lnav](https://lnav.org).
+
+![Screenshot](Screenshot.png)
 
 ## Features
 
