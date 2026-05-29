@@ -1,0 +1,79 @@
+{"timestamp":"2026-05-29T08:00:01.123Z","level":"INFO","module":"main","message":"Application starting on port 8080"}
+{"timestamp":"2026-05-29T08:00:01.456Z","level":"INFO","module":"main","message":"Connected to database","details":{"host":"localhost","port":5432,"database":"appdb"}}
+{"timestamp":"2026-05-29T08:00:01.789Z","level":"INFO","module":"main","message":"Redis connection established","details":{"host":"127.0.0.1","port":6379}}
+{"timestamp":"2026-05-29T08:00:02.001Z","level":"INFO","module":"worker-pool","message":"Spawned 4 worker threads"}
+{"timestamp":"2026-05-29T08:00:02.312Z","level":"INFO","module":"http","message":"Listening on 0.0.0.0:8080"}
+{"timestamp":"2026-05-29T08:01:15.004Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":2}
+{"timestamp":"2026-05-29T08:01:15.550Z","level":"INFO","module":"http","message":"GET /api/v1/users 200","duration_ms":34}
+{"timestamp":"2026-05-29T08:01:16.221Z","level":"DEBUG","module":"auth","message":"Token validated","details":{"user_id":"u-83a1f","session":"sess-4920"}}
+{"timestamp":"2026-05-29T08:01:16.890Z","level":"INFO","module":"http","message":"POST /api/v1/orders 201","duration_ms":87}
+{"timestamp":"2026-05-29T08:01:17.003Z","level":"DEBUG","module":"db","message":"Query executed","duration_ms":12,"query":"SELECT * FROM orders WHERE user_id = $1"}
+{"timestamp":"2026-05-29T08:01:18.445Z","level":"INFO","module":"http","message":"GET /api/v1/orders/ord-7821 200","duration_ms":15}
+{"timestamp":"2026-05-29T08:01:19.667Z","level":"WARN","module":"rate-limit","message":"Client approaching rate limit","details":{"client_ip":"192.168.1.42","current":148,"limit":150,"window":"1m"}}
+{"timestamp":"2026-05-29T08:01:20.112Z","level":"INFO","module":"http","message":"PUT /api/v1/users/u-83a1f 200","duration_ms":45}
+{"timestamp":"2026-05-29T08:01:22.334Z","level":"INFO","module":"http","message":"GET /api/v1/products?category=electronics 200","duration_ms":28}
+{"timestamp":"2026-05-29T08:01:25.891Z","level":"ERROR","module":"http","message":"POST /api/v1/payments 500","duration_ms":203,"error":"InternalServerError: payment gateway timeout"}
+{"timestamp":"2026-05-29T08:01:25.892Z","level":"ERROR","module":"payments","message":"Failed to process payment","details":{"payment_id":"pay-0921","order_id":"ord-7821","amount":149.99,"currency":"EUR","gateway":"stripe","retry_count":0,"error":"gateway response timeout after 200ms"}}
+{"timestamp":"2026-05-29T08:01:26.001Z","level":"INFO","module":"payments","message":"Retrying payment pay-0921 (attempt 1/3)"}
+{"timestamp":"2026-05-29T08:01:26.455Z","level":"INFO","module":"payments","message":"Payment processed successfully on retry","details":{"payment_id":"pay-0921","order_id":"ord-7821","amount":149.99,"currency":"EUR","transaction_id":"txn-88431a"}}
+{"timestamp":"2026-05-29T08:01:30.002Z","level":"INFO","module":"cron","message":"Running scheduled job: cleanup_expired_sessions"}
+{"timestamp":"2026-05-29T08:01:30.789Z","level":"INFO","module":"cron","message":"Removed 23 expired sessions"}
+{"timestamp":"2026-05-29T08:02:01.003Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":1}
+{"timestamp":"2026-05-29T08:02:05.112Z","level":"DEBUG","module":"cache","message":"Cache miss, fetching from db","key":"product:p-4412"}
+{"timestamp":"2026-05-29T08:02:05.234Z","level":"DEBUG","module":"db","message":"Query executed","duration_ms":8,"query":"SELECT * FROM products WHERE id = $1"}
+{"timestamp":"2026-05-29T08:02:05.240Z","level":"DEBUG","module":"cache","message":"Cached key with TTL","key":"product:p-4412","ttl_seconds":300}
+{"timestamp":"2026-05-29T08:02:10.567Z","level":"INFO","module":"http","message":"POST /api/v1/auth/login 200","duration_ms":112}
+{"timestamp":"2026-05-29T08:02:10.890Z","level":"INFO","module":"auth","message":"User logged in","details":{"user_id":"u-29f4c","ip":"10.0.0.51","user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36"}}
+{"timestamp":"2026-05-29T08:02:14.332Z","level":"INFO","module":"http","message":"GET /api/v1/notifications 200","duration_ms":19}
+{"timestamp":"2026-05-29T08:02:18.001Z","level":"WARN","module":"db","message":"Slow query detected","duration_ms":245,"query":"SELECT o.*, p.name FROM orders o JOIN products p ON o.product_id = p.id WHERE o.status = 'pending' ORDER BY o.created_at DESC LIMIT 100"}
+{"timestamp":"2026-05-29T08:02:20.445Z","level":"INFO","module":"http","message":"DELETE /api/v1/orders/ord-3310 204","duration_ms":33}
+{"timestamp":"2026-05-29T08:02:25.667Z","level":"INFO","module":"websocket","message":"Client connected","details":{"conn_id":"ws-conn-812","active_connections":47}}
+{"timestamp":"2026-05-29T08:02:30.001Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":1}
+{"timestamp":"2026-05-29T08:02:35.889Z","level":"DEBUG","module":"auth","message":"Refreshing token","details":{"user_id":"u-83a1f","expires_in":3600}}
+{"timestamp":"2026-05-29T08:02:40.123Z","level":"INFO","module":"http","message":"POST /api/v1/uploads 201","duration_ms":1543}
+{"timestamp":"2026-05-29T08:02:40.125Z","level":"INFO","module":"storage","message":"File uploaded","details":{"filename":"invoice-2026-05.pdf","size_mb":2.3,"destination":"s3://app-uploads/u-83a1f/invoice-2026-05.pdf"}}
+{"timestamp":"2026-05-29T08:02:45.334Z","level":"ERROR","module":"websocket","message":"Connection dropped unexpectedly","details":{"conn_id":"ws-conn-790","reason":"peer reset"}}
+{"timestamp":"2026-05-29T08:02:45.335Z","level":"INFO","module":"websocket","message":"46 active connections remaining"}
+{"timestamp":"2026-05-29T08:02:50.112Z","level":"INFO","module":"http","message":"GET /api/v1/orders?status=shipped 200","duration_ms":41}
+{"timestamp":"2026-05-29T08:02:55.445Z","level":"INFO","module":"http","message":"PATCH /api/v1/orders/ord-7821 200","duration_ms":29}
+{"timestamp":"2026-05-29T08:03:00.002Z","level":"INFO","module":"cron","message":"Running scheduled job: sync_inventory"}
+{"timestamp":"2026-05-29T08:03:02.567Z","level":"INFO","module":"cron","message":"Inventory sync complete","details":{"products_updated":12,"errors":0}}
+{"timestamp":"2026-05-29T08:03:05.890Z","level":"WARN","module":"auth","message":"Failed login attempt","details":{"email":"admin@example.com","ip":"203.0.113.55"}}
+{"timestamp":"2026-05-29T08:03:06.001Z","level":"WARN","module":"auth","message":"Failed login attempt","details":{"email":"admin@example.com","ip":"203.0.113.55"}}
+{"timestamp":"2026-05-29T08:03:06.112Z","level":"WARN","module":"auth","message":"Failed login attempt","details":{"email":"admin@example.com","ip":"203.0.113.55"}}
+{"timestamp":"2026-05-29T08:03:06.113Z","level":"WARN","module":"security","message":"Brute force detection triggered","details":{"email":"admin@example.com","ip":"203.0.113.55","failed_attempts":3,"lockout_minutes":15}}
+{"timestamp":"2026-05-29T08:03:10.334Z","level":"INFO","module":"http","message":"GET /api/v1/users/u-83a1f/preferences 200","duration_ms":11}
+{"timestamp":"2026-05-29T08:03:15.667Z","level":"DEBUG","module":"db","message":"Connection pool stats","details":{"active":8,"idle":12,"total":20,"max":50}}
+{"timestamp":"2026-05-29T08:03:20.001Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":1}
+{"timestamp":"2026-05-29T08:03:25.123Z","level":"INFO","module":"http","message":"POST /api/v1/orders 201","duration_ms":95}
+{"timestamp":"2026-05-29T08:03:25.124Z","level":"INFO","module":"notifications","message":"Sending order confirmation email","details":{"user_id":"u-29f4c","order_id":"ord-8834"}}
+{"timestamp":"2026-05-29T08:03:25.890Z","level":"INFO","module":"email","message":"Email delivered","details":{"to":"vlad@example.com","provider":"ses","message_id":"m-5523af"}}
+{"timestamp":"2026-05-29T08:03:30.445Z","level":"INFO","module":"http","message":"GET /api/v1/search?q=wireless+headphones 200","duration_ms":67}
+{"timestamp":"2026-05-29T08:03:30.446Z","level":"DEBUG","module":"search","message":"Elasticsearch query completed","duration_ms":52,"results_count":23}
+{"timestamp":"2026-05-29T08:03:35.112Z","level":"INFO","module":"http","message":"GET /api/v1/analytics/dashboard 200","duration_ms":189}
+{"timestamp":"2026-05-29T08:03:40.001Z","level":"WARN","module":"memory","message":"High heap usage","details":{"used_gb":1.56,"max_gb":2.0,"percent":78}}
+{"timestamp":"2026-05-29T08:03:45.334Z","level":"INFO","module":"http","message":"POST /api/v1/webhooks/stripe 200","duration_ms":8}
+{"timestamp":"2026-05-29T08:03:45.335Z","level":"INFO","module":"payments","message":"Webhook received: payment_intent.succeeded","details":{"transaction_id":"txn-88431a"}}
+{"timestamp":"2026-05-29T08:03:50.667Z","level":"INFO","module":"http","message":"GET /api/v1/orders/ord-8834/tracking 200","duration_ms":22}
+{"timestamp":"2026-05-29T08:03:55.890Z","level":"DEBUG","module":"cache","message":"Cache hit","key":"user:u-83a1f:prefs"}
+{"timestamp":"2026-05-29T08:04:00.003Z","level":"INFO","module":"cron","message":"Running scheduled job: generate_daily_report"}
+{"timestamp":"2026-05-29T08:04:05.112Z","level":"INFO","module":"reports","message":"Daily report generated","details":{"total_orders":156,"revenue":23481.50,"currency":"USD","uptime_percent":99.2}}
+{"timestamp":"2026-05-29T08:04:10.445Z","level":"INFO","module":"http","message":"POST /api/v1/auth/logout 200","duration_ms":5}
+{"timestamp":"2026-05-29T08:04:10.446Z","level":"DEBUG","module":"auth","message":"Session invalidated","details":{"session":"sess-4920","user_id":"u-83a1f"}}
+{"timestamp":"2026-05-29T08:04:15.001Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":1}
+{"timestamp":"2026-05-29T08:04:20.334Z","level":"INFO","module":"gc","message":"Minor GC pause","duration_ms":4,"freed_mb":128}
+{"timestamp":"2026-05-29T08:04:25.667Z","level":"ERROR","module":"http","message":"GET /api/v1/products/p-9999 404","duration_ms":3,"error":"NotFoundError: product not found"}
+{"timestamp":"2026-05-29T08:04:30.890Z","level":"INFO","module":"http","message":"GET /api/v1/categories 200","duration_ms":12}
+{"timestamp":"2026-05-29T08:04:35.112Z","level":"INFO","module":"websocket","message":"Broadcast sent","details":{"event":"inventory_update","clients":46}}
+{"timestamp":"2026-05-29T08:04:40.445Z","level":"DEBUG","module":"db","message":"Query executed","duration_ms":3,"query":"INSERT INTO audit_log (user_id, action, resource) VALUES ($1, $2, $3)"}
+{"timestamp":"2026-05-29T08:04:45.778Z","level":"INFO","module":"http","message":"GET /api/v1/orders?page=2&limit=25 200","duration_ms":38}
+{"timestamp":"2026-05-29T08:04:50.001Z","level":"INFO","module":"http","message":"GET /api/health 200","duration_ms":1}
+{"timestamp":"2026-05-29T08:04:55.334Z","level":"WARN","module":"rate-limit","message":"Client approaching rate limit","details":{"client_ip":"10.0.0.51","current":142,"limit":150,"window":"1m"}}
+{"timestamp":"2026-05-29T08:05:00.002Z","level":"INFO","module":"cron","message":"Running scheduled job: cleanup_expired_sessions"}
+{"timestamp":"2026-05-29T08:05:00.667Z","level":"INFO","module":"cron","message":"Removed 7 expired sessions"}
+{"timestamp":"2026-05-29T08:05:05.890Z","level":"INFO","module":"http","message":"POST /api/v1/feedback 201","duration_ms":14}
+{"timestamp":"2026-05-29T08:05:10.112Z","level":"INFO","module":"main","message":"Graceful shutdown initiated (SIGTERM)"}
+{"timestamp":"2026-05-29T08:05:10.113Z","level":"INFO","module":"worker-pool","message":"Draining 4 worker threads..."}
+{"timestamp":"2026-05-29T08:05:10.334Z","level":"INFO","module":"websocket","message":"Closing 46 active connections"}
+{"timestamp":"2026-05-29T08:05:10.667Z","level":"INFO","module":"db","message":"Connection pool drained","details":{"active_queries":0}}
+{"timestamp":"2026-05-29T08:05:10.890Z","level":"INFO","module":"main","message":"Shutdown complete","details":{"uptime_seconds":309}}

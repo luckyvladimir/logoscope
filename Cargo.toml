@@ -1,0 +1,9 @@
+[package]
+name = "logoscope"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+crossterm = { version = "0.29.0", features = ["use-dev-tty"] }
+libc = "0.2.186"
+ratatui = "0.30.0"
